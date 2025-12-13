@@ -4,10 +4,13 @@ import java.awt.Color;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
 
 public class Login extends JFrame implements ActionListener{
 
     JButton login, cancel, signup;
+    JTextField username, password;
+    Choice loginin;
     
     Login() {
         super("Login Page");
@@ -18,7 +21,7 @@ public class Login extends JFrame implements ActionListener{
         lblusername.setBounds(220, 20, 100, 20);
         add(lblusername);
 
-        JTextField username = new JTextField();
+        username = new JTextField();
         username.setBounds(320, 20, 150, 20);
         add(username);
 
@@ -26,7 +29,7 @@ public class Login extends JFrame implements ActionListener{
         lblpassword.setBounds(220, 60, 100, 20);
         add(lblpassword);
 
-        JTextField password = new JTextField();
+        password = new JTextField();
         password.setBounds(320, 60, 150, 20);
         add(password);
 
@@ -34,7 +37,7 @@ public class Login extends JFrame implements ActionListener{
         loginas.setBounds(220, 80, 100, 20);
         add(loginas);
 
-        Choice loginin = new Choice();
+        loginin = new Choice();
         loginin.add("Admin");
         loginin.add("Customer");
         loginin.setBounds(320, 80, 150, 20);
@@ -75,7 +78,28 @@ public class Login extends JFrame implements ActionListener{
     
      public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == login) {
-         
+            String susername = username.getText();
+            String spassword = password.getText();
+            String user = loginin.getSelectedItem();
+            
+            try{
+                Conn c = new Conn();
+                String query = "select * from login where username ='"+susername+"' and password = '"+spassword+"' and user = '"+user+"'";
+                
+                ResultSet rs = c.s.executeQuery(query);
+                
+                if(rs.next()){
+                    setVisible(false);
+                    new Project();
+                } else{
+                    JOptionPane.showMessageDialog(null, "Invalid Login");
+                    username.setText("");
+                    password.setText("");
+                }
+                
+            } catch(Exception e){
+                e.printStackTrace();
+            }
         } else if (ae.getSource() == cancel) {
             setVisible(false);
         } else if (ae.getSource() == signup) {
