@@ -46,7 +46,7 @@ public class Signup extends JFrame implements ActionListener{
         
         meter = new JTextField();
         meter.setBounds(260, 90, 150, 20);
-        meter.setVisible(false);
+        meter.setVisible(false); 
         panel.add(meter);
         
         JLabel lblusername = new JLabel("Username");
