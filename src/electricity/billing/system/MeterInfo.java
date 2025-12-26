@@ -7,7 +7,7 @@ import java.awt.event.*;
 
 public class MeterInfo extends JFrame implements ActionListener{
 
-    JTextField tfname, tfaddress, tfstate, tfcity, tfemail, tfphone;
+    JTextField tfname, tfaddress, tfcity, tfemail, tfphone;
     JButton next, cancel;
     JLabel lblmeter;
     Choice meterlocation, metertype, phasecode, billtype;

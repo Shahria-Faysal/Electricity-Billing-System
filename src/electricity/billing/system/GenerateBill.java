@@ -75,7 +75,7 @@ public class GenerateBill extends JFrame implements ActionListener {
             Conn c = new Conn();
             String month = cmonth.getSelectedItem();
 
-            area.setText("\tReliance Power Limited\nELECTRICITY BILL GENERATED FOR THE MONTH\n\tOF "
+            area.setText("\tBangladesh Power Development Board\nELECTRICITY BILL GENERATED FOR THE MONTH\n\tOF "
                     + month + ", 2022\n\n");
 
             ResultSet rs = c.s.executeQuery(
@@ -86,7 +86,6 @@ public class GenerateBill extends JFrame implements ActionListener {
                 area.append("\nMeter Number    : " + rs.getString("meter_no"));
                 area.append("\nAddress         : " + rs.getString("address"));
                 area.append("\nCity            : " + rs.getString("city"));
-                area.append("\nState           : " + rs.getString("state"));
                 area.append("\nEmail           : " + rs.getString("email"));
                 area.append("\nPhone           : " + rs.getString("phone"));
                 area.append("\n------------------------------------------\n");

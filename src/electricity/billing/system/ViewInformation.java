@@ -49,28 +49,21 @@ public class ViewInformation extends JFrame implements ActionListener{
         city.setBounds(250, 260, 100, 20);
         add(city);
         
-        JLabel lblstate = new JLabel("State");
-        lblstate.setBounds(500, 80, 100, 20);
-        add(lblstate);
-        
-        JLabel state = new JLabel("");
-        state.setBounds(650, 80, 100, 20);
-        add(state);
         
         JLabel lblemail = new JLabel("Email");
-        lblemail.setBounds(500, 140, 100, 20);
+        lblemail.setBounds(500, 80, 100, 20);
         add(lblemail);
         
         JLabel email = new JLabel("");
-        email.setBounds(650, 140, 100, 20);
+        email.setBounds(650, 80, 100, 20);
         add(email);
         
         JLabel lblphone = new JLabel("Phone");
-        lblphone.setBounds(500, 200, 100, 20);
+        lblphone.setBounds(500, 140, 100, 20);
         add(lblphone);
         
         JLabel phone = new JLabel("");
-        phone.setBounds(650, 200, 100, 20);
+        phone.setBounds(650, 140, 100, 20);
         add(phone);
         
         try {
@@ -80,7 +73,6 @@ public class ViewInformation extends JFrame implements ActionListener{
                 name.setText(rs.getString("name"));
                 address.setText(rs.getString("address"));
                 city.setText(rs.getString("city"));
-                state.setText(rs.getString("state"));
                 email.setText(rs.getString("email"));
                 phone.setText(rs.getString("phone"));
                 meternumber.setText(rs.getString("meter_no"));

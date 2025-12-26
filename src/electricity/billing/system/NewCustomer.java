@@ -7,7 +7,7 @@ import java.awt.event.*;
 
 public class NewCustomer extends JFrame implements ActionListener{
     
-    JTextField tfname, tfaddress, tfstate, tfcity, tfemail, tfphone;
+    JTextField tfname, tfaddress, tfcity, tfemail, tfphone;
     JButton next, cancel;
     JLabel lblmeter;
     NewCustomer() {
@@ -60,28 +60,21 @@ public class NewCustomer extends JFrame implements ActionListener{
         tfcity.setBounds(240, 200, 200, 20);
         p.add(tfcity);
         
-        JLabel lblstate = new JLabel("State");
-        lblstate.setBounds(100, 240, 100, 20);
-        p.add(lblstate);
-        
-        tfstate = new JTextField();
-        tfstate.setBounds(240, 240, 200, 20);
-        p.add(tfstate);
         
         JLabel lblemail = new JLabel("Email");
-        lblemail.setBounds(100, 280, 100, 20);
+        lblemail.setBounds(100, 240, 100, 20);
         p.add(lblemail);
         
         tfemail = new JTextField();
-        tfemail.setBounds(240, 280, 200, 20);
+        tfemail.setBounds(240, 240, 200, 20);
         p.add(tfemail);
         
         JLabel lblphone = new JLabel("Phone Number");
-        lblphone.setBounds(100, 320, 100, 20);
+        lblphone.setBounds(100, 280, 100, 20);
         p.add(lblphone);
         
         tfphone = new JTextField();
-        tfphone.setBounds(240, 320, 200, 20);
+        tfphone.setBounds(240, 280, 200, 20);
         p.add(tfphone);
         
         next = new JButton("Next");
@@ -119,12 +112,11 @@ public class NewCustomer extends JFrame implements ActionListener{
             String meter = lblmeter.getText();
             String address = tfaddress.getText();
             String city = tfcity.getText();
-            String state = tfstate.getText();
             String email = tfemail.getText();
             String phone = tfphone.getText();
             
-            String query1 = "insert into customer values('"+name+"', '"+meter+"', '"+address+"', '"+city+"', '"+state+"', '"+email+"', '"+phone+"')";
-            String query2 = "insert into login values('"+meter+"', '', '"+name+"', '', '','')";
+            String query1 = "insert into customer values('"+name+"', '"+meter+"', '"+address+"', '"+city+"', '"+email+"', '"+phone+"')";
+            String query2 = "insert into login values('"+meter+"', '', '"+name+"', '', '',NOW())";
             
             try {
                 Conn c = new Conn();
@@ -133,8 +125,7 @@ public class NewCustomer extends JFrame implements ActionListener{
                 
                 JOptionPane.showMessageDialog(null, "Customer Details Added Successfully");
                 setVisible(false);
-                
-                // new frame
+
                    new MeterInfo(meter);
             } catch (Exception e) {
                 e.printStackTrace();

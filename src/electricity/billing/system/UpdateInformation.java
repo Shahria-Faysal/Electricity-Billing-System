@@ -9,7 +9,7 @@ import java.awt.event.*;
 public class UpdateInformation extends JFrame implements ActionListener{
      
     JLabel name;
-    JTextField tfaddress, tfstate, tfcity, tfemail, tfphone;
+    JTextField tfaddress, tfcity, tfemail, tfphone;
     String meter;
     JButton update, cancel;
     
@@ -56,28 +56,21 @@ public class UpdateInformation extends JFrame implements ActionListener{
         tfcity.setBounds(230, 190, 200, 20);
         add(tfcity);
         
-        JLabel lblstate = new JLabel("State");
-        lblstate.setBounds(30, 230, 100, 20);
-        add(lblstate);
-        
-        tfstate = new JTextField();
-        tfstate.setBounds(230, 230, 200, 20);
-        add(tfstate);
         
         JLabel lblemail = new JLabel("Email");
-        lblemail.setBounds(30, 270, 100, 20);
+        lblemail.setBounds(30, 230, 100, 20);
         add(lblemail);
         
         tfemail = new JTextField();
-        tfemail.setBounds(230, 270, 200, 20);
+        tfemail.setBounds(230, 230, 200, 20);
         add(tfemail);
         
         JLabel lblphone = new JLabel("Phone");
-        lblphone.setBounds(30, 310, 100, 20);
+        lblphone.setBounds(30, 270, 100, 20);
         add(lblphone);
         
         tfphone = new JTextField();
-        tfphone.setBounds(230, 310, 200, 20);
+        tfphone.setBounds(230, 270, 200, 20);
         add(tfphone);
         
         try {
@@ -87,7 +80,6 @@ public class UpdateInformation extends JFrame implements ActionListener{
                 name.setText(rs.getString("name"));
                 tfaddress.setText(rs.getString("address"));
                 tfcity.setText(rs.getString("city"));
-                tfstate.setText(rs.getString("state"));
                 tfemail.setText(rs.getString("email"));
                 tfphone.setText(rs.getString("phone"));
                 meternumber.setText(rs.getString("meter_no"));
@@ -99,14 +91,14 @@ public class UpdateInformation extends JFrame implements ActionListener{
         update = new JButton("Update");
         update.setBackground(Color.BLACK);
         update.setForeground(Color.WHITE);
-        update.setBounds(70, 360, 100, 25);
+        update.setBounds(70, 330, 100, 25);
         add(update);
         update.addActionListener(this);
         
         cancel = new JButton("Cancel");
         cancel.setBackground(Color.BLACK);
         cancel.setForeground(Color.WHITE);
-        cancel.setBounds(230, 360, 100, 25);
+        cancel.setBounds(230, 330, 100, 25);
         add(cancel);
         cancel.addActionListener(this);
 
@@ -123,13 +115,12 @@ public class UpdateInformation extends JFrame implements ActionListener{
         if(ae.getSource()==update){
             String address = tfaddress.getText();
             String city = tfcity.getText();
-            String state = tfstate.getText();
             String email = tfemail.getText();
             String phone = tfphone.getText();
             
             try {
                 Conn c = new Conn();
-                c.s.executeUpdate("update customer set address = '"+address+"', city = '"+city+"', state = '"+state+"', email = '"+email+"', phone = '"+phone+"' where meter_no = '"+meter+"'");
+                c.s.executeUpdate("update customer set address = '"+address+"', city = '"+city+"',email = '"+email+"', phone = '"+phone+"' where meter_no = '"+meter+"'");
                 JOptionPane.showMessageDialog(null, "User Information Updated Successfully");
                 setVisible(false);
             } catch (Exception e) {
