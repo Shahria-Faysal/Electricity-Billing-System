@@ -77,7 +77,7 @@ public class Signup extends JFrame implements ActionListener{
             public void focusLost(FocusEvent fe) {
                 try {
                     Conn c  = new Conn();
-                    ResultSet rs = c.s.executeQuery("select * from login where meter_no = '"+meter.getText()+"'");
+                    ResultSet rs = c.s.executeQuery("select * from customer where meter_no = '"+meter.getText()+"'");
                     while(rs.next()) {
                         name.setText(rs.getString("name"));
                     }
@@ -152,7 +152,7 @@ public class Signup extends JFrame implements ActionListener{
                 if (atype.equals("Admin")) {
                     query = "insert into login values('"+smeter+"', '"+susername+"', '"+sname+"', '"+spassword+"', '"+atype+"',NOW())";
                 } else {
-                    query = "update login set username = '"+susername+"', password = '"+spassword+"', user = '"+atype+"' where meter_no = '"+smeter+"', NOW()";
+                    query = "insert into login values('"+smeter+"', '"+susername+"', '"+sname+"', '"+spassword+"', '"+atype+"',NOW())";
                 }
                 c.s.executeUpdate(query);
                 

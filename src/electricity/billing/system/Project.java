@@ -47,6 +47,7 @@ public class Project extends JFrame implements ActionListener{
         customerdetails.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, ActionEvent.CTRL_MASK));
         master.add(customerdetails);
         
+        
         JMenuItem depositdetails = new JMenuItem("Deposit Details");
         depositdetails.setFont(new Font("monospaced", Font.PLAIN, 12));
         depositdetails.setBackground(Color.WHITE);
@@ -57,6 +58,7 @@ public class Project extends JFrame implements ActionListener{
         depositdetails.addActionListener(this);
         depositdetails.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         master.add(depositdetails);
+        
         
         JMenuItem calculatebill = new JMenuItem("Calculate Bill");
         calculatebill.setFont(new Font("monospaced", Font.PLAIN, 12));
@@ -80,8 +82,10 @@ public class Project extends JFrame implements ActionListener{
         Image image5 = icon5.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         updateinformation.setIcon(new ImageIcon(image5));
         updateinformation.setMnemonic('P');
+        updateinformation.addActionListener(this);
         updateinformation.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
         info.add(updateinformation);
+       
         
         JMenuItem viewinformation = new JMenuItem("View Information");
         viewinformation.setFont(new Font("monospaced", Font.PLAIN, 12));
@@ -107,6 +111,7 @@ public class Project extends JFrame implements ActionListener{
         Image image7 = icon7.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         paybill.setIcon(new ImageIcon(image7));
         paybill.setMnemonic('R');
+        paybill.addActionListener(this);
         paybill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
         user.add(paybill);
         
@@ -117,6 +122,7 @@ public class Project extends JFrame implements ActionListener{
         Image image8 = icon8.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         billdetails.setIcon(new ImageIcon(image8));
         billdetails.setMnemonic('B');
+        billdetails.addActionListener(this);
         billdetails.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
         user.add(billdetails);
         
@@ -131,6 +137,7 @@ public class Project extends JFrame implements ActionListener{
         Image image9 = icon9.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         generatebill.setIcon(new ImageIcon(image9));
         generatebill.setMnemonic('G');
+        generatebill.addActionListener(this);
         generatebill.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
         report.add(generatebill);
         
@@ -146,8 +153,10 @@ public class Project extends JFrame implements ActionListener{
         Image image10 = icon10.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         notepad.setIcon(new ImageIcon(image10));
         notepad.setMnemonic('N');
+        notepad.addActionListener(this);
         notepad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         utility.add(notepad);
+    
         
         JMenuItem calculator = new JMenuItem("Calculator");
         calculator.setFont(new Font("monospaced", Font.PLAIN, 12));
@@ -156,6 +165,7 @@ public class Project extends JFrame implements ActionListener{
         Image image11 = icon11.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         calculator.setIcon(new ImageIcon(image11));
         calculator.setMnemonic('C');
+        calculator.addActionListener(this);
         calculator.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
         utility.add(calculator);
         
@@ -170,6 +180,7 @@ public class Project extends JFrame implements ActionListener{
         Image image12 = icon12.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         exit.setIcon(new ImageIcon(image12));
         exit.setMnemonic('W');
+        exit.addActionListener(this);
         exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));     
         
         
@@ -190,7 +201,7 @@ public class Project extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent ae ){
         String msg = ae.getActionCommand();
-        if (msg.equals("New Customer")) {
+         if (msg.equals("New Customer")) {
             new NewCustomer();
         } else if (msg.equals("Customer Details")) {
             new CustomerDetails();
@@ -200,6 +211,29 @@ public class Project extends JFrame implements ActionListener{
             new CalculateBill();
         } else if (msg.equals("View Information")) {
             new ViewInformation(meter);
+        } else if (msg.equals("Update Information")) {
+            new UpdateInformation(meter);
+        } else if (msg.equals("Bill Details")) {
+            new BillDetails(meter);
+        } else if (msg.equals("Notepad")) {
+            try {
+                Runtime.getRuntime().exec("notepad.exe");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (msg.equals("Calculator")) {
+            try {
+                Runtime.getRuntime().exec("calc.exe");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (msg.equals("Exit")) {
+            setVisible(false);
+            new Login();
+        } else if (msg.equals("Pay Bill")) {
+            new PayBill(meter);
+        } else if (msg.equals("Generate Bill")) {
+            new GenerateBill(meter);
         }
     }
     
