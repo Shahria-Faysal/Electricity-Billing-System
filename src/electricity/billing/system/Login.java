@@ -6,12 +6,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
-public class Login extends JFrame implements ActionListener{
+public class Login extends JFrame implements ActionListener {
 
     JButton login, cancel, signup;
     JTextField username, password;
     Choice loginin;
-    
+
     Login() {
         super("Login Page");
         getContentPane().setBackground(Color.WHITE);
@@ -75,30 +75,41 @@ public class Login extends JFrame implements ActionListener{
         setLocation(600, 300);
         setVisible(true);
     }
-    
-     public void actionPerformed(ActionEvent ae) {
+
+    public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == login) {
             String susername = username.getText();
             String spassword = password.getText();
             String user = loginin.getSelectedItem();
-            
-            try{
+
+            try {
                 Conn c = new Conn();
-                String query = "select * from login where username ='"+susername+"' and password = '"+spassword+"' and user = '"+user+"'";
-                
+                String query = "select * from login where username = '" + susername
+                        + "' and user = '" + user + "'";
+
                 ResultSet rs = c.s.executeQuery(query);
-                
-                if(rs.next()){
-                    String meter = rs.getString("Meter_no");
-                    setVisible(false);
-                    new Project(user, meter);
-                } else{
+
+                if (rs.next()) {
+
+                    String dbHash = rs.getString("password");
+
+                    if (PasswordUtil.checkPassword(spassword, dbHash)) {
+
+                        String meter = rs.getString("meter_no");
+                        setVisible(false);
+                        new Project(user, meter);
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid Password");
+                        password.setText("");
+                    }
+                } else {
                     JOptionPane.showMessageDialog(null, "Invalid Login");
                     username.setText("");
                     password.setText("");
                 }
-                
-            } catch(Exception e){
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         } else if (ae.getSource() == cancel) {

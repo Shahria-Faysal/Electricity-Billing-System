@@ -144,15 +144,16 @@ public class Signup extends JFrame implements ActionListener{
             String sname = name.getText();
             String spassword = password.getText();
             String smeter = meter.getText();
+            String hashedPassword = PasswordUtil.hashPassword(spassword);
            
             try {
                 Conn c = new Conn();
                 
                 String query = null;
                 if (atype.equals("Admin")) {
-                    query = "insert into login values('"+smeter+"', '"+susername+"', '"+sname+"', '"+spassword+"', '"+atype+"',NOW())";
+                    query = "insert into login values('"+smeter+"', '"+susername+"', '"+sname+"', '"+hashedPassword+"', '"+atype+"',NOW())";
                 } else {
-                    query = "insert into login values('"+smeter+"', '"+susername+"', '"+sname+"', '"+spassword+"', '"+atype+"',NOW())";
+                    query = "insert into login values('"+smeter+"', '"+susername+"', '"+sname+"', '"+hashedPassword+"', '"+atype+"',NOW())";
                 }
                 c.s.executeUpdate(query);
                 
