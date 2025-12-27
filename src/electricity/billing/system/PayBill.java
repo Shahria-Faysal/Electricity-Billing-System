@@ -11,6 +11,8 @@ public class PayBill extends JFrame implements ActionListener{
    Choice cmonth;
    JButton pay, back;
    String meter;
+   String mail, name, month;
+   double amount;
    
    PayBill(String meter){
        this.meter = meter;
@@ -90,12 +92,17 @@ public class PayBill extends JFrame implements ActionListener{
            while(rs.next()){
                meternumber.setText("meter");
                labelname.setText(rs.getString("name"));
+               mail = rs.getString("email");
+               name = rs.getString("name");
            }
+           month = cmonth.getSelectedItem();
            rs = c.s.executeQuery("select * from bill where meter_no = '"+meter+"' AND month = 'January'");
            while(rs.next()) {
                 labelunits.setText(rs.getString("units"));
                 labeltotalbill.setText(rs.getString("totalbill"));
                 labelstatus.setText(rs.getString("status"));
+                String billStr = rs.getString("totalbill").trim();
+                amount = Double.parseDouble(billStr);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,6 +118,9 @@ public class PayBill extends JFrame implements ActionListener{
                         labelunits.setText(rs.getString("units"));
                         labeltotalbill.setText(rs.getString("totalbill"));
                         labelstatus.setText(rs.getString("status"));
+                        String billStr = rs.getString("totalbill").trim();
+                        amount = Double.parseDouble(billStr);
+                        month = cmonth.getSelectedItem();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -148,6 +158,7 @@ public class PayBill extends JFrame implements ActionListener{
            try {
                Conn c = new Conn();
                c.s.executeUpdate("update bill set status = 'Paid' where meter_no = '"+meter+"' AND month='"+cmonth.getSelectedItem()+"'");
+               new SendMail(mail,name,meter,month,amount);
            } catch (Exception e) {
                e.printStackTrace();
            }
@@ -161,6 +172,5 @@ public class PayBill extends JFrame implements ActionListener{
     
     public static void main(String[] args){
         new PayBill("");
-    }
-   
+    }  
 }

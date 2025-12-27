@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class CalculateBill extends JFrame implements ActionListener{
-    JTextField tfname, tfaddress, tfstate, tfunits, tfemail, tfphone;
+    JTextField tfname, tfaddress, tfunits, tfemail, tfphone;
     JButton next, cancel;
     JLabel lblname, labeladdress;
     Choice meternumber, cmonth;
@@ -163,7 +163,6 @@ public class CalculateBill extends JFrame implements ActionListener{
                     totalbill += Integer.parseInt(rs.getString("meter_rent"));
                     totalbill += Integer.parseInt(rs.getString("service_charge"));
                     totalbill += Integer.parseInt(rs.getString("service_tax"));
-                    totalbill += Integer.parseInt(rs.getString("swacch_bharat_cess"));
                     totalbill += Integer.parseInt(rs.getString("fixed_tax"));
                 }
             } catch (Exception e) {
