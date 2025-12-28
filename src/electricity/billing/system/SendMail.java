@@ -19,8 +19,8 @@ public class SendMail {
     private void send(String customerEmail, String customerName,
                       String meterNo, String month, double amount) throws Exception {
 
-        String from = "shahriafaysal1@gmail.com";
-        String password = "irbu yxux bhno rmvn";
+        String from = "your@gmail.com";
+        String password = "your app password";
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
